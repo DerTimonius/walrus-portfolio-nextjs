@@ -1,34 +1,26 @@
-import { readdirSync } from 'node:fs';
-import Image from 'next/image';
+import PhotoGallery from '../Components/PhotoGallery';
+import getPhotoObjectsArray, { Photos } from '../utils/getPhotoObjects';
 
-interface Props {
-  fileNames: string[];
-}
-export default function Pictures({ fileNames }: Props) {
+type Props = {
+  photos: Photos[];
+};
+
+export default function Pictures({ photos }: Props) {
   return (
     <>
       <h1>This is a test</h1>
-      {fileNames.map((file) => {
-        return (
-          <Image
-            src={`/img/test/${file}`}
-            width={300}
-            height={400}
-            alt="test"
-            key={file}
-          />
-        );
-      })}
+      <PhotoGallery photos={photos} />
     </>
   );
 }
 
-export function getServerSideProps() {
-  const fileNames = readdirSync('./public/img/test');
+export async function getServerSideProps() {
+  const paths = { fullPath: './public/img/test', shortenedPath: '/img/test/' };
 
+  const photos = await getPhotoObjectsArray(paths);
   return {
     props: {
-      fileNames: fileNames,
+      photos: photos,
     },
   };
 }
