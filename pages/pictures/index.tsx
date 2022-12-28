@@ -1,5 +1,5 @@
-import PhotoGallery from '../Components/PhotoGallery';
-import getPhotoObjectsArray, { Photos } from '../utils/getPhotoObjects';
+import PhotoGallery from '../../Components/PhotoGallery.js';
+import getPhotoObjectsArray, { Photos } from '../../utils/getPhotoObjects';
 
 type Props = {
   photos: Photos[];
