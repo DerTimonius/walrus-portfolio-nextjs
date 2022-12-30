@@ -1,19 +1,41 @@
 import { existsSync } from 'node:fs';
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import PhotoGallery from '../../Components/PhotoGallery';
 import getPhotoObjectsArray, { Photos } from '../../utils/getPhotoObjects';
 
 type Props =
   | {
       photos: Photos[];
+      pageName: string;
     }
   | {
       error: string;
     };
 
+const imageStyles = css`
+  div {
+    padding: 12px;
+    margin: 12px;
+  }
+  img {
+    padding: 0.125em;
+  }
+`;
+
 export default function PictureGallery(props: Props) {
+  useEffect(() => {
+    const handleContextmenu = (e: any) => {
+      e.preventDefault();
+    };
+    document.addEventListener('contextmenu', handleContextmenu);
+    return function cleanup() {
+      document.removeEventListener('contextmenu', handleContextmenu);
+    };
+  }, []);
   if ('error' in props) {
     return (
       <>
@@ -33,10 +55,10 @@ export default function PictureGallery(props: Props) {
     );
   }
   return (
-    <>
-      <h1>This is a test</h1>
+    <div css={imageStyles}>
+      {props.pageName ? <h1>{props.pageName} Photography</h1> : null}
       <PhotoGallery photos={props.photos} />
-    </>
+    </div>
   );
 }
 
@@ -59,6 +81,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       photos: photos,
+      pageName: pageName,
     },
   };
 }

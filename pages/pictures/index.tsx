@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PhotoGallery from '../../Components/PhotoGallery.js';
 import getPhotoObjectsArray, { Photos } from '../../utils/getPhotoObjects';
 
@@ -6,12 +7,16 @@ type Props = {
 };
 
 export default function Pictures({ photos }: Props) {
-  return (
-    <>
-      <h1>This is a test</h1>
-      <PhotoGallery photos={photos} />
-    </>
-  );
+  useEffect(() => {
+    const handleContextmenu = (e: any) => {
+      e.preventDefault();
+    };
+    document.addEventListener('contextmenu', handleContextmenu);
+    return function cleanup() {
+      document.removeEventListener('contextmenu', handleContextmenu);
+    };
+  }, []);
+  return <PhotoGallery photos={photos} />;
 }
 
 export async function getServerSideProps() {

@@ -1,8 +1,8 @@
 import '../styles/globals.css';
 import { css, Global } from '@emotion/react';
-import Grid from '@mui/material/Grid';
 import type { AppProps } from 'next/app';
-import Sidebar from '../Components/Sidebar';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,35 +17,25 @@ export default function App({ Component, pageProps }: AppProps) {
           }
           body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: grid;
-            grid-template-columns: 200px repeat(4, 1 fr);
-            grid-template-areas: 'sidebar main main main main';
-          }
-          nav {
-            grid-area: sidebar;
-          }
-          .component {
-            grid-area: main;
           }
           a {
             opacity: 0.7;
             transition: all 0.15s linear;
             font-size: 18px;
           }
-          a:hover {
-            opacity: 1;
-            font-size: 20px;
+          .components {
+            margin-top: 36px;
+          }
+          footer {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
           }
         `}
       />
-      <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={8}>
-          <Component {...pageProps} className="component" />{' '}
-        </Grid>
-      </Grid>
+      <Header />
+      <Component {...pageProps} className="components" />
+      <Footer />
     </div>
   );
 }
