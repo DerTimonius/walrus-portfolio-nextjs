@@ -8,11 +8,12 @@ const headerStyles = css`
     height: 50px;
     padding: 12px;
     margin: 24px 0 12px;
-    border-bottom: 1px solid black;
   }
   nav {
     display: flex;
     justify-content: space-around;
+    margin: 24px 12px;
+    padding: 6px;
   }
   a {
     position: relative;
