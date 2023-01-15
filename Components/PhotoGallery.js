@@ -26,6 +26,8 @@ export default function PhotoGallery({ photos }) {
               views={photos.map((x) => ({
                 ...x,
               }))}
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              components={{ HeaderFullscreen: () => true }}
             />
           </Modal>
         ) : null}
