@@ -11,6 +11,7 @@ function getPictureDimensions(picture: string) {
   const buffer = readFileSync(picture);
   const parser = ExifParser.create(buffer);
   const exifData = parser.parse();
+  console.log(exifData)
   const width = exifData.imageSize.width;
   const height = exifData.imageSize.height;
   return { width, height };

@@ -1,9 +1,11 @@
 import { existsSync } from 'node:fs';
+
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
+
 import PhotoGallery from '../../Components/PhotoGallery';
 import getPhotoObjectsArray, { Photos } from '../../utils/getPhotoObjects';
 
@@ -21,8 +23,12 @@ const imageStyles = css`
     padding: 12px;
     margin: 12px;
   }
+  h1 {
+    margin-top: 24px;
+    font-size: 36px;
+  }
   img {
-    padding: 0.125em;
+    padding: 0.25em;
   }
 `;
 
@@ -55,10 +61,27 @@ export default function PictureGallery(props: Props) {
     );
   }
   return (
-    <div css={imageStyles}>
-      {props.pageName ? <h1>{props.pageName} Photography</h1> : null}
-      <PhotoGallery photos={props.photos} />
-    </div>
+    <>
+      <Head>
+        <meta
+          name="description"
+          content={`Display of photographs by Lukas Hahn with the theme ${props.pageName}`}
+        />
+        <title>
+          {props.pageName.slice(0, 1).toUpperCase() + props.pageName.slice(1)}{' '}
+          Photography
+        </title>
+      </Head>
+      <div css={imageStyles}>
+        {props.pageName ? (
+          <h1>
+            {props.pageName.slice(0, 1).toUpperCase() + props.pageName.slice(1)}{' '}
+            Photography
+          </h1>
+        ) : null}
+        <PhotoGallery photos={props.photos} />
+      </div>
+    </>
   );
 }
 
