@@ -1,13 +1,13 @@
 import '../styles/globals.css';
 
 import { css, Global } from '@emotion/react';
-import { Quicksand } from '@next/font/google';
+import { Sono } from '@next/font/google';
 import type { AppProps } from 'next/app';
 
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
-const quicksand = Quicksand({ subsets: ['latin'] });
+const sono = Sono({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
             box-sizing: border-box;
           }
           body {
-            font-family: ${quicksand.style.fontFamily}, 'Segoe UI', Tahoma,
+            font-family: ${sono.style.fontFamily}, 'Segoe UI', Tahoma,
               Geneva, Verdana, sans-serif;
             text-align: center;
             color: white;
