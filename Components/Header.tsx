@@ -8,6 +8,7 @@ const headerStyles = css`
     height: 50px;
     padding: 12px;
     margin: 24px 0 12px;
+    align-items: center;
   }
   nav {
     display: flex;
@@ -34,16 +35,29 @@ const headerStyles = css`
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-`;
+  img {
+    height: 5rem;
+  }
+  nav img {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  `;
 
 export default function Header() {
   return (
     <header css={headerStyles}>
       <nav>
-        <Link href="/">Home</Link>
-        <Link href="/pictures/nature">Nature</Link>
-        <Link href="/pictures/test">Test</Link>
+        <Link href="/"><img src="/walrus_logo.png" alt="Home"/></Link>
+        <Link href="/pictures/analogue">Analogue</Link>
+        <Link href="/pictures/portrait">Portrait</Link>
         <Link href="/pictures/street">Street</Link>
+        <Link href="/pictures/landscape">Landscape</Link>
+        <Link href="/pictures/animals">Animals</Link>
+        <Link href="/pictures/macro">Macro</Link>
+        <Link href="/pictures/plants">Plants</Link>
+        <Link href="/about">About</Link>
       </nav>
     </header>
   );
