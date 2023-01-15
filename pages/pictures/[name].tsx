@@ -28,7 +28,7 @@ const imageStyles = css`
     font-size: 36px;
   }
   img {
-    padding: 0.125em;
+    padding: 0.25em;
   }
 `;
 

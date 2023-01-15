@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
               #eceef9,
               #f6f6f6
             ); */
-            background-color: aliceblue;
+            background-color: #000000;
           }
           a {
             opacity: 0.85;
