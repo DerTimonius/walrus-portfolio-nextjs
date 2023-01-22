@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 
 import PhotoGallery from '../../Components/PhotoGallery';
-import getPhotoObjectsArray, { Photos } from '../../utils/getPhotoObjects';
+import getPhotoObjectsArray from '../../utils/getPhotoObjects';
+import { Photos } from './index';
 
 type Props =
   | {
