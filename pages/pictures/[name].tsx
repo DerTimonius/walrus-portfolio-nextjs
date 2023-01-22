@@ -106,7 +106,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     fullPath: `./public/img/${pageName}`,
     shortenedPath: `/img/${pageName}/`,
   };
-  const directoryExists = existsSync(paths.shortenedPath);
+  const directoryExists = existsSync(paths.fullPath);
+  console.log('directoryExists', directoryExists);
   if (!directoryExists) {
     context.res.statusCode = 404;
     return {
