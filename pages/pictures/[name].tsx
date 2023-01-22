@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 import PhotoGallery from '../../Components/PhotoGallery';
 import getPhotoObjectsArray from '../../utils/getPhotoObjects';
+import serverPath from '../../utils/pathsHelperFunction';
 import { Photos } from './index';
 
 type Props =
@@ -103,11 +104,10 @@ export default function PictureGallery(props: Props) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const pageName = context.query.name;
   const paths = {
-    fullPath: `./public/img/${pageName}`,
+    fullPath: serverPath(`./public/img/${pageName}`),
     shortenedPath: `/img/${pageName}/`,
   };
   const directoryExists = existsSync(paths.fullPath);
-  console.log('readdirSync', readdirSync(paths.fullPath));
   if (!directoryExists) {
     context.res.statusCode = 404;
     return {
