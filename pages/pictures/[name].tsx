@@ -1,4 +1,5 @@
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
@@ -8,7 +9,6 @@ import { useEffect } from 'react';
 
 import PhotoGallery from '../../Components/PhotoGallery';
 import getPhotoObjectsArray from '../../utils/getPhotoObjects';
-import serverPath from '../../utils/pathsHelperFunction';
 import { Photos } from './index';
 
 type Props =
@@ -103,24 +103,27 @@ export default function PictureGallery(props: Props) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const pageName = context.query.name;
-  const paths = {
-    fullPath: serverPath(`./public/img/${pageName}`),
-    shortenedPath: `/img/${pageName}/`,
-  };
-  const directoryExists = existsSync(paths.fullPath);
-  if (!directoryExists) {
-    context.res.statusCode = 404;
+  const dir = resolve('./public', 'img');
+  if (typeof pageName === 'string') {
+    const paths = {
+      fullPath: join(dir, pageName),
+      shortenedPath: `/img/${pageName}/`,
+    };
+    const directoryExists = existsSync(paths.fullPath);
+    if (!directoryExists) {
+      context.res.statusCode = 404;
+      return {
+        props: {
+          error: 'Sorry, there are no pictures here! :(',
+        },
+      };
+    }
+    const photos = await getPhotoObjectsArray(paths);
     return {
       props: {
-        error: 'Sorry, there are no pictures here! :(',
+        photos: photos,
+        pageName: pageName,
       },
     };
   }
-  const photos = await getPhotoObjectsArray(paths);
-  return {
-    props: {
-      photos: photos,
-      pageName: pageName,
-    },
-  };
 }
