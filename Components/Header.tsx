@@ -79,7 +79,7 @@ export default function Header() {
           <img src="/walrus_logo.png" alt="Home" />
         </Link>
         <div className="dropdown">
-          <Link href="/pictures">Photography</Link>
+          <Link href="">Photography</Link>
           <div className="dropdown-content">
             <Link href="/pictures/analogue">Analogue</Link>
             <Link href="/pictures/portrait">Portrait</Link>

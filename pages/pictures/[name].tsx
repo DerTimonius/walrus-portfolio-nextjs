@@ -19,6 +19,13 @@ type Props =
     };
 
 const imageStyles = css`
+  p {
+    padding-top: 5%;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-bottom: 10%;
+    text-align: justify;
+  }
   div {
     padding: 12px;
     margin: 12px;
@@ -30,6 +37,10 @@ const imageStyles = css`
   img {
     padding: 0.25em;
   }
+  i {
+    font-size: 12px;
+  }
+
 `;
 
 export default function PictureGallery(props: Props) {
@@ -49,11 +60,11 @@ export default function PictureGallery(props: Props) {
           <meta name="description" content="No pictures found" />
           <title>No pictures found!</title>
         </Head>
-        <div>
+        <div css={imageStyles}>
           <h3>{props.error}</h3>
           <p>
             Hey, it looks like you stumbled into here. No worries,{' '}
-            <Link href="/pictures">here</Link> you can find more beautiful
+            <Link href="/pictures/analogue">here</Link> you can find more beautiful
             pictures.
           </p>
         </div>
@@ -80,6 +91,8 @@ export default function PictureGallery(props: Props) {
           </h1>
         ) : null}
         <PhotoGallery photos={props.photos} />
+        <i>All images are mine and all rights are reserved.
+          Do not use without permission.</i>
       </div>
     </>
   );
@@ -96,7 +109,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context.res.statusCode = 404;
     return {
       props: {
-        error: 'Sorry, there are no pictures here!',
+        error: 'Sorry, there are no pictures here! :(',
       },
     };
   }
