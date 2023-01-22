@@ -7,7 +7,7 @@ const footerStyles = css`
     flex-direction: row;
     justify-content: flex-end;
     margin-bottom: 12px;
-    align: right;
+    text-align: right;
   }
   span {
     font-weight: 600;
@@ -44,10 +44,10 @@ export default function Footer() {
     <footer css={footerStyles}>
       <Link href="/impressum">Impressum</Link>
       <div>
-        <p>
-          <div className="tooltip">Contact
-          <p className="tooltiptext">mail(at)flyingwalrus(dot)de</p></div>
-        </p>
+        <div className="tooltip">
+          Contact
+          <p className="tooltiptext">mail(at)flyingwalrus(dot)de</p>
+        </div>
       </div>
     </footer>
   );

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { listClasses } from '@mui/material';
 import Link from 'next/link';
 
 const headerStyles = css`
@@ -79,7 +78,7 @@ export default function Header() {
           <img src="/walrus_logo.png" alt="Home" />
         </Link>
         <div className="dropdown">
-          <Link href="">Photography</Link>
+          <Link href="/">Photography</Link>
           <div className="dropdown-content">
             <Link href="/pictures/analogue">Analogue</Link>
             <Link href="/pictures/portrait">Portrait</Link>
