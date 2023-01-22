@@ -41,7 +41,6 @@ const imageStyles = css`
   i {
     font-size: 12px;
   }
-
 `;
 
 export default function PictureGallery(props: Props) {
@@ -65,8 +64,8 @@ export default function PictureGallery(props: Props) {
           <h3>{props.error}</h3>
           <p>
             Hey, it looks like you stumbled into here. No worries,{' '}
-            <Link href="/pictures/analogue">here</Link> you can find more beautiful
-            pictures.
+            <Link href="/pictures/analogue">here</Link> you can find more
+            beautiful pictures.
           </p>
         </div>
       </>
@@ -92,8 +91,10 @@ export default function PictureGallery(props: Props) {
           </h1>
         ) : null}
         <PhotoGallery photos={props.photos} />
-        <i>All images are mine and all rights are reserved.
-          Do not use without permission.</i>
+        <i>
+          All images are mine and all rights are reserved. Do not use without
+          permission.
+        </i>
       </div>
     </>
   );
@@ -105,7 +106,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     fullPath: `./public/img/${pageName}`,
     shortenedPath: `/img/${pageName}/`,
   };
-  const directoryExists = existsSync(paths.fullPath);
+  const directoryExists = existsSync(paths.shortenedPath);
   if (!directoryExists) {
     context.res.statusCode = 404;
     return {
