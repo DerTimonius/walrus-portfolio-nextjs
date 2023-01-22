@@ -20,7 +20,7 @@ export default function Pictures({ photos }: Props) {
 }
 
 export async function getServerSideProps() {
-  const paths = { fullPath: './public/img/test', shortenedPath: '/img/test/' };
+  const paths = { fullPath: './public/img/portrait', shortenedPath: '/img/portrait/' };
 
   const photos = await getPhotoObjectsArray(paths);
   return {
