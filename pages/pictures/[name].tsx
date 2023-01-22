@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
@@ -107,7 +107,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     shortenedPath: `/img/${pageName}/`,
   };
   const directoryExists = existsSync(paths.fullPath);
-  console.log('directoryExists', directoryExists);
+  console.log('readdirSync', readdirSync(paths.fullPath));
   if (!directoryExists) {
     context.res.statusCode = 404;
     return {
