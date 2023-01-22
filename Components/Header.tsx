@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { listClasses } from '@mui/material';
 import Link from 'next/link';
 
 const headerStyles = css`
@@ -13,6 +14,7 @@ const headerStyles = css`
   nav {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin: 24px 12px;
     padding: 6px;
   }
@@ -43,20 +45,51 @@ const headerStyles = css`
     vertical-align: middle;
     cursor: pointer;
   }
-  `;
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    height: min-content;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 18px 24px;
+    z-index: 1;
+    color: black;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    text-align: left;
+  }
+`;
 
 export default function Header() {
   return (
     <header css={headerStyles}>
       <nav>
-        <Link href="/"><img src="/walrus_logo.png" alt="Home"/></Link>
-        <Link href="/pictures/analogue">Analogue</Link>
-        <Link href="/pictures/portrait">Portrait</Link>
-        <Link href="/pictures/street">Street</Link>
-        <Link href="/pictures/landscape">Landscape</Link>
-        <Link href="/pictures/animals">Animals</Link>
-        <Link href="/pictures/macro">Macro</Link>
-        <Link href="/pictures/plants">Plants</Link>
+        <Link href="/">
+          <img src="/walrus_logo.png" alt="Home" />
+        </Link>
+        <div className="dropdown">
+          <Link href="/pictures">Photography</Link>
+          <div className="dropdown-content">
+            <Link href="/pictures/analogue">Analogue</Link>
+            <Link href="/pictures/portrait">Portrait</Link>
+            <Link href="/pictures/street">Street</Link>
+            <Link href="/pictures/landscape">Landscape</Link>
+            <Link href="/pictures/animals">Animals</Link>
+            <Link href="/pictures/macro">Macro</Link>
+            <Link href="/pictures/plants">Plants</Link>
+          </div>
+        </div>
         <Link href="/about">About</Link>
       </nav>
     </header>
