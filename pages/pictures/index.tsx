@@ -1,3 +1,5 @@
+import { join, resolve } from 'node:path';
+
 import { useEffect } from 'react';
 
 import PhotoGallery from '../../Components/PhotoGallery.js';
@@ -27,9 +29,11 @@ export default function Pictures({ photos }: Props) {
 }
 
 export async function getServerSideProps() {
+  const dir = resolve('./public', 'img');
+
   const paths = {
-    fullPath: './public/img/portrait',
-    shortenedPath: '/img/portrait/',
+    fullPath: join(dir, 'portrait'),
+    shortenedPath: `/img/portrait/`,
   };
 
   const photos = await getPhotoObjectsArray(paths);

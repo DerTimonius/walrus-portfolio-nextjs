@@ -1,24 +1,15 @@
-import { existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
-
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import PhotoGallery from '../../Components/PhotoGallery';
-import getPhotoObjectsArray from '../../utils/getPhotoObjects';
 import { Photos } from './index';
 
-type Props =
-  | {
-      photos: Photos[];
-      pageName: string;
-    }
-  | {
-      error: string;
-    };
+type Props = {
+  pageName: string;
+};
 
 const imageStyles = css`
   p {
@@ -45,6 +36,29 @@ const imageStyles = css`
 `;
 
 export default function PictureGallery(props: Props) {
+  const [photos, setPhotos] = useState<Photos[] | undefined>(undefined);
+  const [errors, setErrors] = useState<{ message: string } | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    async function fetchPhotos() {
+      const response = await fetch('/api/pictures/getPictures', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ folderName: props.pageName }),
+      });
+      const data = await response.json();
+      setPhotos(data.photos);
+      setErrors(data.errors);
+    }
+    fetchPhotos()
+      .then()
+      .catch((err) => console.log(err));
+  }, [props.pageName]);
+
   useEffect(() => {
     const handleContextmenu = (e: any) => {
       e.preventDefault();
@@ -54,7 +68,7 @@ export default function PictureGallery(props: Props) {
       document.removeEventListener('contextmenu', handleContextmenu);
     };
   }, []);
-  if ('error' in props) {
+  if (errors) {
     return (
       <>
         <Head>
@@ -62,7 +76,7 @@ export default function PictureGallery(props: Props) {
           <title>No pictures found!</title>
         </Head>
         <div css={imageStyles}>
-          <h3>{props.error}</h3>
+          <h3>{errors.message}</h3>
           <p>
             Hey, it looks like you stumbled into here. No worries,{' '}
             <Link href="/pictures/analogue">here</Link> you can find more
@@ -72,6 +86,7 @@ export default function PictureGallery(props: Props) {
       </>
     );
   }
+
   return (
     <>
       <Head>
@@ -91,7 +106,7 @@ export default function PictureGallery(props: Props) {
             Photography
           </h1>
         ) : null}
-        <PhotoGallery photos={props.photos} />
+        {photos && <PhotoGallery photos={photos} />}
         <i>
           All images are mine and all rights are reserved. Do not use without
           permission.
@@ -101,29 +116,11 @@ export default function PictureGallery(props: Props) {
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export function getServerSideProps(context: GetServerSidePropsContext) {
   const pageName = context.query.name;
-  const dir = resolve('./public', 'img');
-  if (typeof pageName === 'string') {
-    const paths = {
-      fullPath: join(dir, pageName),
-      shortenedPath: `/img/${pageName}/`,
-    };
-    const directoryExists = existsSync(paths.fullPath);
-    if (!directoryExists) {
-      context.res.statusCode = 404;
-      return {
-        props: {
-          error: 'Sorry, there are no pictures here! :(',
-        },
-      };
-    }
-    const photos = await getPhotoObjectsArray(paths);
-    return {
-      props: {
-        photos: photos,
-        pageName: pageName,
-      },
-    };
-  }
+  return {
+    props: {
+      pageName: pageName,
+    },
+  };
 }
