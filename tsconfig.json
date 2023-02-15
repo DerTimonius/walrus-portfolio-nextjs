@@ -20,7 +20,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/getPhotoObjects.js"
+    "utils/getPhotoObjects.js",
+    "Components/PhotoGallery.js"
   ],
   "exclude": ["node_modules"]
 }
