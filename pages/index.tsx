@@ -44,7 +44,7 @@ export default function Home() {
         <h1>Welcome, Friend!</h1>
         <img src="/home.jpg" alt="Home" />
         <p>
-          Thanks for stopping by. You have found my little photo page containing
+          Thanks for stopping by! You have found my little photo page containing
           some images I shot in the last three to four years or so. Please have
           a look around and maybe by the time you come back I've found a better
           text than this. In case you have any questions, feel free to reach
