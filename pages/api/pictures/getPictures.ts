@@ -13,7 +13,6 @@ export default async function handler(
     return res.status(401).json({ errors: { message: 'Invalid Method' } });
   }
   const folderName = req.body.folderName;
-  console.log('typeof', typeof folderName);
   const dir = resolve('./public', 'img');
   if (typeof folderName !== 'string') {
     return res
@@ -31,7 +30,6 @@ export default async function handler(
       .status(404)
       .json({ errors: { message: 'Directory does not exist' } });
   }
-  console.log('paths', paths);
   const photos = await getPhotoObjectsArray(paths);
   if (photos.length === 0) {
     return res

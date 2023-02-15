@@ -7,6 +7,10 @@ import { useEffect, useState } from 'react';
 import PhotoGallery from '../../Components/PhotoGallery';
 import { Photos } from './index';
 
+function capitalizeString(string: string) {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
+}
+
 type Props = {
   pageName: string;
 };
@@ -94,17 +98,11 @@ export default function PictureGallery(props: Props) {
           name="description"
           content={`Display of photographs by Lukas Hahn with the theme ${props.pageName}`}
         />
-        <title>
-          {props.pageName.slice(0, 1).toUpperCase() + props.pageName.slice(1)}{' '}
-          Photography
-        </title>
+        <title>{capitalizeString(props.pageName)} Photography</title>
       </Head>
       <div css={imageStyles}>
         {props.pageName ? (
-          <h1>
-            {props.pageName.slice(0, 1).toUpperCase() + props.pageName.slice(1)}{' '}
-            Photography
-          </h1>
+          <h1>{capitalizeString(props.pageName)} Photography</h1>
         ) : null}
         {photos && <PhotoGallery photos={photos} />}
         <i>
