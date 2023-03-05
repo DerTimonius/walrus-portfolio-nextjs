@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import Carousel, { Modal, ModalGateway } from 'react-images';
 import Gallery from 'react-photo-gallery';
@@ -17,7 +18,12 @@ export default function PhotoGallery({ photos }) {
   };
   return (
     <div>
-      <Gallery photos={photos} direction="column" onClick={openLightbox} />
+      <Gallery
+        photos={photos}
+        direction="column"
+        onClick={openLightbox}
+        ref={<Image />}
+      />
       <ModalGateway>
         {viewerIsOpen ? (
           <Modal onClose={closeLightbox}>
