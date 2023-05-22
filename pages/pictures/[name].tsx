@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import BackToTopButton from '../../Components/BackToTopButton';
 import PhotoGallery from '../../Components/PhotoGallery';
 import { Photos } from './index';
 
@@ -109,6 +110,7 @@ export default function PictureGallery(props: Props) {
           All images are mine and all rights are reserved. Do not use without
           permission.
         </i>
+        <BackToTopButton />
       </div>
     </>
   );
