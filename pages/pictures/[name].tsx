@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
@@ -45,6 +46,8 @@ export default function PictureGallery(props: Props) {
   const [errors, setErrors] = useState<{ message: string } | undefined>(
     undefined,
   );
+
+  const pageName = props.pageName.split('-');
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -99,11 +102,21 @@ export default function PictureGallery(props: Props) {
           name="description"
           content={`Display of photographs by Lukas Hahn with the theme ${props.pageName}`}
         />
-        <title>{capitalizeString(props.pageName)} Photography</title>
+        <title>
+          {pageName.map((string, index) => {
+            return <span key={index}>{capitalizeString(string)} </span>;
+          })}
+          Photography
+        </title>
       </Head>
       <div css={imageStyles}>
         {props.pageName ? (
-          <h1>{capitalizeString(props.pageName)} Photography</h1>
+          <h1>
+            {pageName.map((string, index) => {
+              return <span key={index}>{capitalizeString(string)} </span>;
+            })}
+            Photography
+          </h1>
         ) : null}
         {photos && <PhotoGallery photos={photos} />}
         <i>
