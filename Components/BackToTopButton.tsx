@@ -34,7 +34,7 @@ export default function BackToTopButton() {
         strokeLinecap="round"
         strokeLinejoin="round"
         width="24"
-        height="24"
+        height="22"
       >
         {/* <path d="M12 4l-8 8h6v8h4v-8h6z" /> */}
         {/* <path d="M12 19V5M5 12l7-7 7 7" /> */}

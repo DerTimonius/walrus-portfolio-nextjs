@@ -48,6 +48,7 @@ export default function PictureGallery(props: Props) {
   );
 
   const pageName = props.pageName.split('-');
+  const correctPageTitle = pageName.join(" ")
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -100,13 +101,10 @@ export default function PictureGallery(props: Props) {
       <Head>
         <meta
           name="description"
-          content={`Display of photographs by Lukas Hahn with the theme ${props.pageName}`}
+          content={`Display of photographs by Flying Walrus with the theme ${props.pageName}`}
         />
         <title>
-          {pageName.map((string, index) => {
-            return <span key={index}>{capitalizeString(string)} </span>;
-          })}
-          Photography
+          {capitalizeString(correctPageTitle)} Photography
         </title>
       </Head>
       <div css={imageStyles}>

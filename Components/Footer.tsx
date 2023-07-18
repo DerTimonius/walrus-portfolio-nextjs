@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 
 const footerStyles = css`
+  padding-bottom: 2%;
   .container {
     display: flex;
     flex-direction: row;
@@ -37,12 +38,26 @@ const footerStyles = css`
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+  .wurst {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .wurst a {
+    font-size: 14px;
+  }
 `;
 
 export default function Footer() {
   return (
     <footer css={footerStyles}>
       <Link href="/impressum">Impressum</Link>
+
+      <div className="wurst">
+      Webpage by <a target="_blank" href="https://github.com/DerTimonius">DerTimonius</a>.
+      </div>
+
       <div>
         <div className="tooltip">
           Contact

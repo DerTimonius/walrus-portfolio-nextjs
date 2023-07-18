@@ -64,7 +64,7 @@ const headerStyles = css`
   .dropdown:hover .dropdown-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.0rem;
     justify-content: flex-start;
     text-align: left;
   }
@@ -78,12 +78,14 @@ export default function Header() {
           <img src="/walrus_logo.png" alt="Home" />
         </Link>
         <div className="dropdown">
-          <Link href="/">Photography</Link>
+          Photography
           <div className="dropdown-content">
             <Link href="/pictures/analogue">Analogue</Link>
-            <Link href="/pictures/portrait">Portrait</Link>
+            <Link href="/pictures/portraits">Portraits</Link>
+            <Link href="/pictures/analogue%20Portraits">Analogue Portraits</Link>
             <Link href="/pictures/street">Street</Link>
             <Link href="/pictures/landscape">Landscape</Link>
+            <Link href="/pictures/industry">Industry</Link>
             <Link href="/pictures/animals">Animals</Link>
             <Link href="/pictures/macro">Macro</Link>
             <Link href="/pictures/plants">Plants</Link>

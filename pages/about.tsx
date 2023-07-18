@@ -45,13 +45,11 @@ export default function About() {
         <h1>About</h1>
         <img src="/about.jpg" alt="Home" />
         <p>
-          Hi there! I'm Lukas :)
+          Hi there, I'm Lukas :)
           <br />I like to take pictures of all sorts of things in my free time.
-          On this page you can find a small selection of them. While my output
+          On this page you can find a small selection. While my output
           is predominantly digital, I capture a growing number of pictures on
-          analogue film. I try to keep all my shots as natural as possible and
-          don't care much for editing. I shot Fuji, Canon and Contax cameras. If
-          you have any questions, feel free to drop me a line.
+          analogue film. I shot Fuji, Canon and Contax cameras. If you have any questions, feel free to drop me a line.
           <br />
           <br />
           <i>
