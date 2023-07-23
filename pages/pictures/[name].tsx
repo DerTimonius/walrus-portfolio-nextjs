@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 import BackToTopButton from '../../Components/BackToTopButton';
 import PhotoGallery from '../../Components/PhotoGallery';
+import { env } from '../../utils/env';
 import { Photos } from './index';
 
 function capitalizeString(string: string) {
@@ -15,6 +16,7 @@ function capitalizeString(string: string) {
 
 type Props = {
   pageName: string;
+  password?: string;
 };
 
 const imageStyles = css`
@@ -41,14 +43,52 @@ const imageStyles = css`
   }
 `;
 
-export default function PictureGallery(props: Props) {
+const formStyles = css`
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  button {
+    padding: 4px;
+    margin-top: 8px;
+    border-radius: 4px;
+    color: #000;
+    background-color: white;
+  }
+  input {
+    padding: 4px;
+    margin: 6px;
+    width: 256px;
+  }
+  .error {
+    color: orange;
+  }
+`;
+
+export default function PictureGallery({ password, ...props }: Props) {
   const [photos, setPhotos] = useState<Photos[] | undefined>(undefined);
   const [errors, setErrors] = useState<{ message: string } | undefined>(
     undefined,
   );
-
+  const [accessGranted, setAccessGranted] = useState(!password);
+  const [inputPassword, setInputPassword] = useState('');
+  const [passwordError, setPasswordError] = useState<{ description: string }[]>(
+    [],
+  );
   const pageName = props.pageName.split('-');
-  const correctPageTitle = pageName.join(" ")
+  const correctPageTitle = pageName.join(' ');
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (inputPassword === password) {
+      setAccessGranted(true);
+    } else {
+      setPasswordError([
+        { description: 'Incorrect password, please try again!' },
+      ]);
+    }
+  };
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -103,35 +143,74 @@ export default function PictureGallery(props: Props) {
           name="description"
           content={`Display of photographs by Flying Walrus with the theme ${props.pageName}`}
         />
-        <title>
-          {capitalizeString(correctPageTitle)} Photography
-        </title>
+        <title>{capitalizeString(correctPageTitle)} Photography</title>
       </Head>
-      <div css={imageStyles}>
-        {props.pageName ? (
-          <h1>
-            {pageName.map((string, index) => {
-              return <span key={index}>{capitalizeString(string)} </span>;
-            })}
-            Photography
-          </h1>
-        ) : null}
-        {photos && <PhotoGallery photos={photos} />}
-        <i>
-          All images are mine and all rights are reserved. Do not use without
-          permission.
-        </i>
-        <BackToTopButton />
-      </div>
+      {accessGranted ? (
+        <div css={imageStyles}>
+          {props.pageName ? (
+            <h1>
+              {pageName.map((string, index) => {
+                return (
+                  <span key={`string-${index}`}>
+                    {capitalizeString(string)}{' '}
+                  </span>
+                );
+              })}
+              Photography
+            </h1>
+          ) : null}
+          {photos && <PhotoGallery photos={photos} />}
+          <i>
+            All images are mine and all rights are reserved. Do not use without
+            permission.
+          </i>
+          <BackToTopButton />
+        </div>
+      ) : (
+        <div
+          style={{
+            width: '80vw',
+            height: '80vh',
+            display: 'flex',
+            flexDirection: 'column',
+            margin: 'auto',
+          }}
+          css={formStyles}
+        >
+          <h4>Enter the correct password to view these images</h4>
+          <form onSubmit={handleSubmit}>
+            <input
+              name="password"
+              type="password"
+              value={inputPassword}
+              onChange={(e) => setInputPassword(e.target.value)}
+              placeholder="Super secret password"
+            />
+            {passwordError.length
+              ? passwordError.map((err) => {
+                  return (
+                    <h6 key={`error-${err.description}`} className="error">
+                      {err.description}
+                    </h6>
+                  );
+                })
+              : null}
+            <button onClick={handleSubmit}>Submit</button>
+          </form>
+        </div>
+      )}
     </>
   );
 }
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
   const pageName = context.query.name;
+  // @ts-ignore
+  const password: string | undefined = env[pageName];
   return {
     props: {
-      pageName: pageName,
+      pageName,
+      password,
     },
   };
 }
