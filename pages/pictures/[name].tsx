@@ -16,7 +16,7 @@ function capitalizeString(string: string) {
 
 type Props = {
   pageName: string;
-  password?: string;
+  password: string | null;
 };
 
 const imageStyles = css`
@@ -210,7 +210,7 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       pageName,
-      password,
+      password: password ? password : null,
     },
   };
 }
