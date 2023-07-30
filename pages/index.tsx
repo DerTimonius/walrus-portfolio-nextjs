@@ -6,7 +6,13 @@ const indexStyles = css`
   p {
     padding-left: 20%;
     padding-right: 20%;
-    padding-bottom: 10%;
+    padding-bottom: 2%;
+    text-align: justify;
+  }
+  h6 {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 5%;
     text-align: justify;
   }
   img {
@@ -24,6 +30,12 @@ const indexStyles = css`
       pointer-events: none;
     }
     p {
+      padding-left: 10%;
+      padding-right: 10%;
+      padding-bottom: 10%;
+      text-align: justify;
+    }
+    h6 {
       padding-left: 10%;
       padding-right: 10%;
       padding-bottom: 10%;
@@ -47,9 +59,11 @@ export default function Home() {
           Thanks for stopping by! You have found my little photo page containing
           some images I shot in the last three to four years or so. Please have
           a look around and maybe by the time you come back I've found a better
-          text than this. In case you have any questions, feel free to reach
-          out.
+          text than this. While you absolutely can visit this website on your phone,
+          I highly recommend to view it on a good large screen.
+          In case you have any questions, feel free to reach out. 
         </p>
+        <h6>LAST UPDATE: 1st August 2023</h6>
       </main>
     </>
   );

@@ -49,19 +49,41 @@ const headerStyles = css`
     display: inline-block;
   }
 
-  .dropdown-content {
+  .dropdown-content-digital {
+    border: 2px solid white;
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #DB875C;
     min-width: 160px;
     height: min-content;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
     padding: 18px 24px;
     z-index: 1;
-    color: black;
+    color: white;
   }
 
-  .dropdown:hover .dropdown-content {
+  .dropdown-content-analogue {
+    border: 2px solid white; 
+    display: none;
+    position: absolute;
+    background-color: #5CDBD3;
+    min-width: 160px;
+    height: min-content;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    padding: 18px 24px;
+    z-index: 1;
+    color: white;
+  }
+
+  .dropdown:hover .dropdown-content-analogue {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0rem;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .dropdown:hover .dropdown-content-digital {
     display: flex;
     flex-direction: column;
     gap: 1.0rem;
@@ -78,17 +100,23 @@ export default function Header() {
           <img src="/walrus_logo.png" alt="Home" />
         </Link>
         <div className="dropdown">
-          Photography
-          <div className="dropdown-content">
-            <Link href="/pictures/analogue">Analogue</Link>
-            <Link href="/pictures/portraits">Portraits</Link>
-            <Link href="/pictures/analogue%20Portraits">Analogue Portraits</Link>
+          Analogue
+          <div className="dropdown-content-analogue">
+            <Link href="/pictures/analogue">Landscapes</Link>
+            <Link href="/pictures/analogue%20Portrait">Portraits</Link>
+            <Link href="/pictures/analogue%20Street">Street</Link>
+          </div>
+        </div>
+        <div className="dropdown">
+          Digital
+          <div className="dropdown-content-digital">
+            <Link href="/pictures/portrait">Portraits</Link>
             <Link href="/pictures/street">Street</Link>
             <Link href="/pictures/landscape">Landscape</Link>
             <Link href="/pictures/industry">Industry</Link>
             <Link href="/pictures/animals">Animals</Link>
             <Link href="/pictures/macro">Macro</Link>
-            <Link href="/pictures/plants">Plants</Link>
+            <Link href="/pictures/plant">Plants</Link>
           </div>
         </div>
         <Link href="/about">About</Link>

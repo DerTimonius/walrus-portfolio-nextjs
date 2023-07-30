@@ -31,7 +31,7 @@ const footerStyles = css`
     border-radius: 6px;
     bottom: 120%;
     width: auto;
-    margin-left: -200%;
+    margin-left: -300%;
     position: absolute;
     z-index: 1;
   }
@@ -42,6 +42,7 @@ const footerStyles = css`
     position: relative;
     display: inline-block;
     font-size: 14px;
+    text-align: center;
   }
 
   .wurst a {
