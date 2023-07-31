@@ -102,7 +102,7 @@ export default function Header() {
         <div className="dropdown">
           Analogue
           <div className="dropdown-content-analogue">
-            <Link href="/pictures/analogue">Landscapes</Link>
+            <Link href="/pictures/various%20Analogue">Various</Link>
             <Link href="/pictures/analogue%20Portrait">Portraits</Link>
             <Link href="/pictures/analogue%20Street">Street</Link>
           </div>
@@ -112,9 +112,9 @@ export default function Header() {
           <div className="dropdown-content-digital">
             <Link href="/pictures/portrait">Portraits</Link>
             <Link href="/pictures/street">Street</Link>
-            <Link href="/pictures/landscape">Landscape</Link>
+            <Link href="/pictures/landscape">Landscapes</Link>
             <Link href="/pictures/industry">Industry</Link>
-            <Link href="/pictures/animals">Animals</Link>
+            <Link href="/pictures/animal">Animals</Link>
             <Link href="/pictures/macro">Macro</Link>
             <Link href="/pictures/plant">Plants</Link>
           </div>
